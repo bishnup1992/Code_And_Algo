@@ -27,7 +27,7 @@ public class FindTopKElement {
             frequencyMap.put(num,frequencyMap.getOrDefault(num,0)+1);
         }
         //Step 2: Use a priority queue (min-heap) to keep track of the top K elements based on their frequency
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>(Comparator.comparingInt(frequencyMap::get));//here empty heap created and adding Comparator.compareInt(frequencyMap::get) to compare the frequency of elements in futures when we add elements to the heap.
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(Comparator.comparingInt(num -> frequencyMap.get(num)));//here empty heap created and adding Comparator.compareInt(frequencyMap::get) to compare the frequency of elements in futures when we add elements to the heap.
 
         for(int num: frequencyMap.keySet()){
             minHeap.offer(num); //added the element to the minHeap
