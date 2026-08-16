@@ -5,9 +5,11 @@ import java.util.Map;
 
 public class FindLongestSubStingWithoutRepeatingChar {
     public static void main(String[] args) {
-        String input = "abcabcbb";
+        String input = "daawpeaawpaad";
         int longestLength = getLongestSubStringWithoutRepeatingChar(input);
         System.out.println("Longest substring length without repeating characters: " + longestLength);
+        String longestSubstring = getLongestSubStringWithoutRepeatingCharString(input);
+        System.out.println("Longest substring without repeating characters: " + longestSubstring);
     }
 
     private static int getLongestSubStringWithoutRepeatingChar(String s){
@@ -33,5 +35,29 @@ public class FindLongestSubStingWithoutRepeatingChar {
             maxLength = Math.max(maxLength, currentLength);
         }
         return maxLength;
+    }
+
+    private static String getLongestSubStringWithoutRepeatingCharString(String s){
+        if(s == null || s.isEmpty()){
+            return "";
+        }
+        Map<Character,Integer> lastSeen = new HashMap<>();
+        int left = 0;
+        int maxLength = 0;
+        int startIndex = 0;
+
+        for(int right = 0; right < s.length(); right++){
+            char currChar= s.charAt(right);
+            if(lastSeen.containsKey(currChar)){
+                left = Math.max(left, lastSeen.get(currChar) + 1);
+            }
+            lastSeen.put(currChar, right);
+            int currentLength = right - left + 1;
+            if(currentLength > maxLength){
+                maxLength = currentLength;
+                startIndex = left;
+            }
+        }
+        return s.substring(startIndex, startIndex + maxLength);
     }
 }
