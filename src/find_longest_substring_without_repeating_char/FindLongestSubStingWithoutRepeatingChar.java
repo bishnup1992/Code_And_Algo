@@ -53,6 +53,7 @@ public class FindLongestSubStingWithoutRepeatingChar {
             }
             lastSeen.put(currChar, right);
             int currentLength = right - left + 1;
+            // Update maximum length and starting index of the longest substring
             if(currentLength > maxLength){
                 maxLength = currentLength;
                 startIndex = left;
